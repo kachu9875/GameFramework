@@ -5,7 +5,7 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 	if (SDL_Init(SDL_INIT_EVERYTHING) >= 0)
 	{
 		m_pWindow = SDL_CreateWindow(title, xpos, ypos, width, height, fullscreen);
-
+		
 		if (m_pWindow != 0)
 		{
 			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
@@ -16,7 +16,8 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 				return false;
 			}
 		}
-
+		m_go.load(100, 100, 128, 82, "animate");
+		m_player.load(300, 300, 128, 82, "animate");
 	}
 	else
 	{
@@ -28,10 +29,12 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 void Game::render()
 {
 	SDL_RenderClear(m_pRenderer);
-	TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82,
+	/*TheTextureManager::Instance()->draw("animate", 0, 0, 128, 82,
 		m_pRenderer);
 	TheTextureManager::Instance()->drawFrame("animate", 100, 100,
-		128, 82, 1, m_currentFrame, m_pRenderer);
+		128, 82, 1, m_currentFrame, m_pRenderer);*/
+	m_go.draw(m_pRenderer);
+	m_player.draw(m_pRenderer);
 	SDL_RenderPresent(m_pRenderer);
 }
 
@@ -61,5 +64,7 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
+	//m_currentFrame = int(((SDL_GetTicks() / 100) % 6));
+	m_go.update();
+	m_player.update();
 }

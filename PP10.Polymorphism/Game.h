@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Enemy.h"
-std::vector<GameObject*> m_gameObjects;
+
 
 class Game
 {
@@ -26,4 +26,5 @@ private:
 	GameObject* m_go;
 	GameObject* m_player;
 	GameObject* m_enemy;
+	std::vector<GameObject*> m_gameObjects;
 };

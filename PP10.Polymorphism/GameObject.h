@@ -1,5 +1,6 @@
 #pragma once
 #include "TextureManager.h"
+#include "LoaderParams.h"
 
 class GameObject
 {
@@ -8,7 +9,7 @@ public:
 		std::string textureID);
 	virtual void draw(SDL_Renderer* pRenderer);
 	virtual void update();
-	virtual void clean();
+	virtual void clean() { }
 protected:
 	std::string m_textureID;
 	int m_currentFrame;

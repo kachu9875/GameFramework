@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <math.h>
 #include "SDL.h"
 
 class TextureManager

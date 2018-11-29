@@ -1,6 +1,7 @@
 #include "Game.h"
 
 Game* Game::s_pInstance = 0;
+PlayState* m_pPlayState;
 
 bool Game::init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen)
 {

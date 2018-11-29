@@ -19,6 +19,7 @@ public:
 	bool running() { return m_bRunning; }
 	SDL_Renderer* getRenderer() const { return m_pRenderer; }
 	void quit();
+	GameStateMachine* getStateMachine() { return m_pGameStateMachine; }
 	static Game* Instance()
 	{
 		if (s_pInstance == 0)

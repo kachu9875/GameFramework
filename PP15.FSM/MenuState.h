@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.h"
+#include "PlayState.h"
 #include "Game.h"
 #include "MenuButton.h"
 
@@ -23,6 +24,8 @@ public:
 private:
 	static const std::string s_menuID;
 	static MenuState* s_pInstance;
+	static void s_exitFromMenu();
+	static void s_menuToPlay();
 	MenuState() {}
 };
 typedef MenuState TheMenuState;

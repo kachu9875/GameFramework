@@ -21,22 +21,22 @@ void MenuState::render()
 
 bool MenuState::onEnter()
 {
-	if (!TheTextureManager::Instance()->load("assets/button.png",
+	if (!TheTextureManager::Instance()->load("Asset/button.png",
 		"playbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
-	if (!TheTextureManager::Instance()->load("assets/exit.png",
+	if (!TheTextureManager::Instance()->load("Asset/exit.png",
 		"exitbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
-	//GameObject* button1 = 
-		
-	//GameObject* button2 = 
-		
-	m_gameObjects.push_back(new MenuButton(new LoaderParams(100, 100, 400, 100, "playbutton")));
-	m_gameObjects.push_back(new MenuButton(new LoaderParams(100, 300, 400, 100, "exitbutton")));
+	GameObject* button1 
+		= new MenuButton(new LoaderParams(100, 100, 400, 100, "playbutton"));
+	GameObject* button2 
+		= new MenuButton(new LoaderParams(100, 300, 400, 100, "exitbutton"));	
+	m_gameObjects.push_back(button1);
+	m_gameObjects.push_back(button2);
 	std::cout << "entering MenuState\n";
 	return true;
 }
@@ -54,4 +54,13 @@ bool MenuState::onExit()
 		->clearFromTextureMap("exitbutton");
 	std::cout << "exiting MenuState\n";
 	return true;
+}
+
+void MenuState::s_exitFromMenu()
+{
+	TheGame::Instance()->quit();
+}
+void MenuState::s_menuToPlay()
+{
+	TheGame::Instance()->getStateMachine()->changeState(PlayState::Instance());
 }

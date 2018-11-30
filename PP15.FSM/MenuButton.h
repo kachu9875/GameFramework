@@ -17,6 +17,6 @@ public:
 	virtual void update();
 	virtual void clean();
 	void(*m_callback)();
-	bool m_bReleased;
+	bool m_bReleased = false;
 	MenuButton(const LoaderParams* pParams, void(*callback)());
 };

@@ -12,7 +12,7 @@ void Player::draw()
 
 void Player::handleInput()
 {
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
+	/*if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
 	{
 		m_velocity.setX(2);
 	}
@@ -27,7 +27,11 @@ void Player::handleInput()
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
 	{
 		m_velocity.setY(2);
-	}
+	}*/
+
+	Vector2D* target = TheInputHandler::Instance()->getMousePosition();
+	m_velocity = *target - m_position;
+	m_velocity /= 50;
 }
 
 void Player::update()

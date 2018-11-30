@@ -27,12 +27,10 @@ void PauseState::render()
 }
 bool PauseState::onEnter()
 {
-	if (!TheTextureManager::Instance()->load("Asset/resume.png",
-		"resumebutton", TheGame::Instance()->getRenderer())) {
+	if (!TheTextureManager::Instance()->load("Asset/resume.png", "resumebutton", TheGame::Instance()->getRenderer())) {
 		return false;
 	}
-	if (!TheTextureManager::Instance()->load("Asset/main.png",
-		"mainbutton", TheGame::Instance()->getRenderer())) {
+	if (!TheTextureManager::Instance()->load("Asset/main.png", "mainbutton", TheGame::Instance()->getRenderer())) {
 		return false;
 	}
 	GameObject* button1 = new MenuButton(new LoaderParams(200, 100, 200, 80, "mainbutton"), s_pauseToMain);

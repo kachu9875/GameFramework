@@ -1,5 +1,4 @@
 #include "MenuState.h"
-
 const std::string MenuState::s_menuID = "MENU";
 MenuState *MenuState::s_pInstance = NULL;
 
@@ -21,13 +20,11 @@ void MenuState::render()
 
 bool MenuState::onEnter()
 {
-	if (!TheTextureManager::Instance()->load("Asset/button.png",
-		"playbutton", TheGame::Instance()->getRenderer()))
+	if (!TheTextureManager::Instance()->load("Asset/button.png", "playbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
-	if (!TheTextureManager::Instance()->load("Asset/exit.png",
-		"exitbutton", TheGame::Instance()->getRenderer()))
+	if (!TheTextureManager::Instance()->load("Asset/exit.png", "exitbutton", TheGame::Instance()->getRenderer()))
 	{
 		return false;
 	}
@@ -60,6 +57,7 @@ void MenuState::s_exitFromMenu()
 {
 	TheGame::Instance()->quit();
 }
+
 void MenuState::s_menuToPlay()
 {
 	//TheGame::Instance()->getStateMachine()->changeState(PlayState::Instance());

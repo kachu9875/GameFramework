@@ -62,5 +62,5 @@ void MenuState::s_exitFromMenu()
 }
 void MenuState::s_menuToPlay()
 {
-	TheGame::Instance()->getStateMachine()->changeState(PlayState::Instance());
+	//TheGame::Instance()->getStateMachine()->changeState(PlayState::Instance());
 }

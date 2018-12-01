@@ -4,6 +4,7 @@
 #include "MenuState.h"
 #include "TextureManager.h"
 #include"MenuButton.h"
+class GameObject;
 
 class PauseState : public GameState
 {

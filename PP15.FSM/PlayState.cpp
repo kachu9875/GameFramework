@@ -28,7 +28,7 @@ void PlayState::render()
 bool PlayState::onEnter()
 {
 	if (!TheTextureManager::Instance()->load(
-		"assets/helicopter.png", "helicopter",
+		"Asset/helicopter.png", "helicopter",
 		TheGame::Instance()->getRenderer()))
 	{
 		return false;

@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "GameState.h"
 #include "MenuState.h"
+#include "TextureManager.h"
 #include"MenuButton.h"
 
 class PauseState : public GameState

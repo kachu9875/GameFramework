@@ -6,10 +6,12 @@ void PauseState::s_pauseToMain()
 {
 	TheGame::Instance()->getStateMachine()->changeState(MenuState::Instance());
 }
+
 void PauseState::s_resumePlay()
 {
 	TheGame::Instance()->getStateMachine()->popState();
 }
+
 void PauseState::update()
 {
 	for (int i = 0; i < m_gameObjects.size(); i++)
@@ -17,6 +19,7 @@ void PauseState::update()
 		m_gameObjects[i]->update();
 	}
 }
+
 void PauseState::render()
 {
 	for (int i = 0; i < m_gameObjects.size(); i++)
@@ -24,6 +27,7 @@ void PauseState::render()
 		m_gameObjects[i]->draw();
 	}
 }
+
 bool PauseState::onEnter()
 {
 	if (!TheTextureManager::Instance()->load("Asset/resume.png", "resumebutton", TheGame::Instance()->getRenderer())) {
@@ -39,6 +43,7 @@ bool PauseState::onEnter()
 	std::cout << "entering PauseState\n";
 	return true;
 }
+
 bool PauseState::onExit()
 {
 	for (int i = 0; i < m_gameObjects.size(); i++)

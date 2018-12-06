@@ -2,8 +2,8 @@
 #include "Game.h"
 #include "InputHandler.h"
 #include "PauseState.h"
-#include"Enemy.h"
-#include"GameOverState.h"
+#include "Enemy.h"
+#include "GameOverState.h"
 #include "SDLGameObject.h"
 const std::string PlayState::s_playID = "PLAY";
 PlayState *PlayState::s_pInstance = NULL;
@@ -14,15 +14,15 @@ void PlayState::update()
 	{
 		TheGame::Instance()->getStateMachine()->pushState(PauseState::Instance());
 	}
-	for (int i = 0; i < m_gameObjects.size(); i++)
-	{
-		m_gameObjects[i]->update();
-	}
-	if (checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]),
-		dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
-	{
-		TheGame::Instance()->getStateMachine()->pushState(
-			GameOverState::Instance());
+	else {
+		for (int i = 0; i < m_gameObjects.size(); i++)
+		{
+			m_gameObjects[i]->update();
+		}
+		if (checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
+		{
+			TheGame::Instance()->getStateMachine()->pushState(GameOverState::Instance());
+		}
 	}
 }
 

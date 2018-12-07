@@ -5,6 +5,7 @@ class GameState
 {
 protected:
 	std::vector<GameObject*> m_gameObjects;
+	GameObject* m_gameback;
 public:
 	virtual void update() = 0;
 	virtual void render() = 0;

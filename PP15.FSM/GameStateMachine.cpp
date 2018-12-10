@@ -1,4 +1,5 @@
 #include "GameStateMachine.h"
+#include "PlayState.h"
 
 void GameStateMachine::popState()
 {
@@ -34,3 +35,4 @@ void GameStateMachine::render()
 	if (m_currentState != NULL)
 		m_currentState->render();
 }
+

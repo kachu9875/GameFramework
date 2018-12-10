@@ -42,7 +42,8 @@ bool GameOverState::onEnter()
 	m_gameObjects.push_back(gameOverText);
 	m_gameObjects.push_back(button1);
 	m_gameObjects.push_back(button2);
-	std::cout << "entering PauseState\n";
+	std::cout << "entering GameOverState\n";
+	std::cout << "Score : " << ThePlayState::Instance()->getrecscore() << "\n";
 	return true;
 }
 

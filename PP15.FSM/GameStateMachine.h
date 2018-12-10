@@ -9,6 +9,7 @@ public:
 	void popState();
 	void update();
 	void render();
+	
 private:
 	GameState* m_currentState;
 	GameState* m_prevState;

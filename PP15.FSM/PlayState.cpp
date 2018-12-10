@@ -8,8 +8,10 @@
 const std::string PlayState::s_playID = "PLAY";
 PlayState *PlayState::s_pInstance = NULL;
 
+
 void PlayState::update()
 {
+	
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
 		TheGame::Instance()->getStateMachine()->pushState(PauseState::Instance());
@@ -18,12 +20,15 @@ void PlayState::update()
 		for (int i = 0; i < m_gameObjects.size(); i++)
 		{
 			m_gameObjects[i]->update();
+			recscore(score);
+			getrecscore();
 		}
 		if (checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
 		{
 			TheGame::Instance()->getStateMachine()->pushState(GameOverState::Instance());
 		}
 	}
+	
 }
 
 void PlayState::render()
@@ -84,4 +89,25 @@ bool PlayState::checkCollision(SDLGameObject* p1, SDLGameObject* p2)
 	if (rightA <= leftB) { return false; }
 	if (leftA >= rightB) { return false; }
 	return true;
+}
+
+void PlayState::recscore(int score)
+{
+	//if(checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[1]))==false)
+	{
+		if (score % 500 == 0 && score != 0)
+		{
+			score += 1000;
+		}
+		else
+		{
+			score++;
+		}
+		totscore = score;
+	}
+}
+
+int PlayState::getrecscore()
+{
+	return totscore;
 }

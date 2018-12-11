@@ -20,15 +20,16 @@ public:
 		return s_pInstance;
 	}
 	bool checkCollision(SDLGameObject* p1, SDLGameObject* p2);
-	void recscore(int score);
+	
 	int getrecscore();
-	int score = 0;
-	int totscore;
+	
+	//int totscore;
 private:
 	static const std::string s_playID;
 	static PlayState* s_pInstance;
 	std::vector<GameObject*> m_gameObjects;
 	PlayState() {}
-	
+	void recscore();
+	int score;
 };
 typedef PlayState ThePlayState;

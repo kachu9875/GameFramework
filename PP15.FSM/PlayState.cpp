@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "GameOverState.h"
 #include "SDLGameObject.h"
+#include <ctime>
 const std::string PlayState::s_playID = "PLAY";
 PlayState *PlayState::s_pInstance = NULL;
 
@@ -16,17 +17,18 @@ void PlayState::update()
 	{
 		TheGame::Instance()->getStateMachine()->pushState(PauseState::Instance());
 	}
-	else {
+	else 
+	{
 		for (int i = 0; i < m_gameObjects.size(); i++)
 		{
 			m_gameObjects[i]->update();
-			recscore(score);
-			getrecscore();
+			
 		}
 		if (checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
 		{
 			TheGame::Instance()->getStateMachine()->pushState(GameOverState::Instance());
 		}
+		recscore();
 	}
 	
 }
@@ -53,6 +55,7 @@ bool PlayState::onEnter()
 	m_gameObjects.push_back(player);
 	m_gameObjects.push_back(enemy);
 	std::cout << "entering PlayState\n";
+	score = 0;
 	return true;
 }
 
@@ -91,23 +94,16 @@ bool PlayState::checkCollision(SDLGameObject* p1, SDLGameObject* p2)
 	return true;
 }
 
-void PlayState::recscore(int score)
+void PlayState::recscore()
 {
-	//if(checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[1]))==false)
+	score++;
+	if (score % 500 == 0 && score != 0)
 	{
-		if (score % 500 == 0 && score != 0)
-		{
-			score += 1000;
-		}
-		else
-		{
-			score++;
-		}
-		totscore = score;
+		score += 1000;
 	}
 }
 
 int PlayState::getrecscore()
 {
-	return totscore;
+	return score;
 }

@@ -31,3 +31,4 @@ private:
 	static const std::string s_gameOverID;
 	std::vector<GameObject*> m_gameObjects;
 };
+typedef GameOverState TheGameOverState;

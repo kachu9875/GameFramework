@@ -4,14 +4,12 @@ GameOverState* GameOverState::s_pInstance = NULL;
 
 void GameOverState::s_gameOverToMain()
 {
-	TheGame::Instance()->getStateMachine()->changeState(
-		MenuState::Instance());
+	TheGame::Instance()->getStateMachine()->changeState(MenuState::Instance());
 }
 
 void GameOverState::s_restartPlay()
 {
-	TheGame::Instance()->getStateMachine()->changeState(
-		PlayState::Instance());
+	TheGame::Instance()->getStateMachine()->changeState(PlayState::Instance());
 }
 
 bool GameOverState::onEnter()

@@ -22,11 +22,17 @@ void PlayState::update()
 		for (int i = 0; i < m_gameObjects.size(); i++)
 		{
 			m_gameObjects[i]->update();
-			
+
+			if (checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i])) && (i != 0))
+			{
+				TheGame::Instance()->getStateMachine()->pushState(GameOverState::Instance());
+			}
 		}
-		if (checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[1])))
+		adt++;
+		if (adt >= 100)
 		{
-			TheGame::Instance()->getStateMachine()->pushState(GameOverState::Instance());
+			call_enemy(-100, rand() % 450, 128, 55);
+			adt = 0;
 		}
 		recscore();
 	}
@@ -44,19 +50,25 @@ void PlayState::render()
 
 bool PlayState::onEnter()
 {
+	srand(time(NULL));
 	if (!TheTextureManager::Instance()->load("Asset/helicopter.png", "helicopter", TheGame::Instance()->getRenderer())) {
 		return false;
 	}
 	if (!TheTextureManager::Instance()->load("Asset/helicopter2.png", "helicopter2", TheGame::Instance()->getRenderer())) {
 		return false;
 	}
-	GameObject* player = new Player(new LoaderParams(500, 100, 128, 55, "helicopter"));
-	GameObject* enemy = new Enemy(new LoaderParams(100, 100, 128, 55, "helicopter2"));
+	GameObject* player = new Player(new LoaderParams(500, 100, 128, 55, "helicopter"));	
 	m_gameObjects.push_back(player);
-	m_gameObjects.push_back(enemy);
+	call_enemy(-100, 150, 128, 55);
 	std::cout << "entering PlayState\n";
 	score = 0;
 	return true;
+}
+
+void PlayState::call_enemy(int x, int y, int width, int height)
+{
+	GameObject* enemy = new Enemy(new LoaderParams(x, y, width, height, "helicopter2"));
+	m_gameObjects.push_back(enemy);
 }
 
 bool PlayState::onExit()

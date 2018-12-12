@@ -20,7 +20,7 @@ public:
 		return s_pInstance;
 	}
 	bool checkCollision(SDLGameObject* p1, SDLGameObject* p2);
-	
+	void call_enemy(int x, int y, int width, int height);
 	int getrecscore();
 	
 	//int totscore;
@@ -31,5 +31,6 @@ private:
 	PlayState() {}
 	void recscore();
 	int score;
+	int adt = 0;
 };
 typedef PlayState ThePlayState;

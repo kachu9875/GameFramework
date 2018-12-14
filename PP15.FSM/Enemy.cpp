@@ -6,7 +6,7 @@ Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
 	/*m_velocity.setY(2);
 	m_velocity.setX(0.001);*/
 	srand(time(NULL));
-	Xspeed = rand() % 10 + 3;
+	Xspeed = rand() % 10 + 4;
 }
 
 void Enemy::draw()

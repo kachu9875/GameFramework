@@ -3,6 +3,7 @@
 #include "InputHandler.h"
 #include "PauseState.h"
 #include "Enemy.h"
+#include "BackgroundManager.h"
 #include "GameOverState.h"
 #include "SDLGameObject.h"
 #include <ctime>
@@ -27,14 +28,22 @@ void PlayState::update()
 			{
 				TheGame::Instance()->getStateMachine()->pushState(GameOverState::Instance());
 			}
+			else if (checkOut(dynamic_cast<SDLGameObject*>(m_gameObjects[i])) && (i != 0))
+			{
+				m_gameObjects.erase(m_gameObjects.begin() + i);
+				i--;
+			}
 		}
 		adt++;
-		if (adt >= 100)
-		{
-			call_enemy(-100, rand() % 450, 128, 55);
-			adt = 0;
+		if (adt % 30 == 0)
+		{			
+				call_enemy(-100, rand() % 670, 128, 55);
 		}
 		recscore();
+		for (int j = 0; j < m_pbackground.size(); j++)
+		{
+			m_pbackground[j]->update();
+		}
 	}
 	
 }
@@ -42,6 +51,10 @@ void PlayState::update()
 void PlayState::render()
 {
 	// nothing for now
+	for (int i = 0; i < m_pbackground.size(); i++)
+	{
+		m_pbackground[i]->draw();
+	}
 	for (int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->draw();
@@ -57,9 +70,15 @@ bool PlayState::onEnter()
 	if (!TheTextureManager::Instance()->load("Asset/helicopter2.png", "helicopter2", TheGame::Instance()->getRenderer())) {
 		return false;
 	}
-	GameObject* player = new Player(new LoaderParams(500, 100, 128, 55, "helicopter"));	
+	if (!TheTextureManager::Instance()->load("Asset/Playbackground.png", "pbackground", TheGame::Instance()->getRenderer())) {
+		return false;
+	}
+	GameObject* player = new Player(new LoaderParams(500, 100, 128, 55, "helicopter"));
+
+	load_pBackground(1280, 0, 1280, 720);
+	load_pBackground(0, 0, 1280, 720);
 	m_gameObjects.push_back(player);
-	call_enemy(-100, 150, 128, 55);
+	call_enemy(-100, 360, 128, 55);
 	std::cout << "entering PlayState\n";
 	score = 0;
 	return true;
@@ -94,16 +113,32 @@ bool PlayState::checkCollision(SDLGameObject* p1, SDLGameObject* p2)
 	topA = p1->getPosition().getY();
 	bottomA = p1->getPosition().getY() + p1->getHeight();
 	//Calculate the sides of rect B
-	leftB = p2->getPosition().getX();
-	rightB = p2->getPosition().getX() + p2->getWidth();
-	topB = p2->getPosition().getY();
-	bottomB = p2->getPosition().getY() + p2->getHeight();
+	leftB = p2->getPosition().getX()+2;
+	rightB = p2->getPosition().getX() + p2->getWidth()-2;
+	topB = p2->getPosition().getY()+2;
+	bottomB = p2->getPosition().getY() + p2->getHeight()-2;
 	//If any of the sides from A are outside of B
 	if (bottomA <= topB) { return false; }
 	if (topA >= bottomB) { return false; }
 	if (rightA <= leftB) { return false; }
 	if (leftA >= rightB) { return false; }
 	return true;
+}
+
+bool PlayState::checkOut(SDLGameObject* p1)
+{
+	int x = p1->getPosition().getX();
+	if (x > 1300)
+	{
+		return true;
+	}
+	return false;
+}
+
+void PlayState::load_pBackground(int x, int y, int w, int h)
+{
+	GameObject* pbackground = new BackgroundManager(new LoaderParams(x, y, w, h, "pbackground"));
+	m_pbackground.push_back(pbackground);
 }
 
 void PlayState::recscore()

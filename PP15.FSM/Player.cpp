@@ -17,19 +17,19 @@ void Player::handleInput()
 	m_velocity /= 50;*/
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
 	{
-		m_velocity.setX(5);
+		m_velocity.setX(7);
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
 	{
-		m_velocity.setX(-5);
+		m_velocity.setX(-7);
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
 	{
-		m_velocity.setY(-5);
+		m_velocity.setY(-7);
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
 	{
-		m_velocity.setY(5);
+		m_velocity.setY(7);
 	}
 }
 
